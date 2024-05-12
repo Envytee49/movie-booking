@@ -1,7 +1,7 @@
 package com.example.mbs.dto.theatre;
 
 import com.example.mbs.dto.city.CityDTO;
-import com.example.mbs.models.theatre.Theatre;
+import com.example.mbs.models.Theatre;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

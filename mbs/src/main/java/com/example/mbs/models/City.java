@@ -1,18 +1,19 @@
-package com.example.mbs.models.city;
+package com.example.mbs.models;
 
-import com.example.mbs.models.theatre.Theatre;
 import com.example.mbs.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "cities")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.example.mbs.models.reservation;
+package com.example.mbs.models;
 import com.example.mbs.models.seat.Seat;
 import com.example.mbs.models.show.Show;
 import com.example.mbs.models.user.User;

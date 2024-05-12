@@ -1,4 +1,4 @@
-package com.example.mbs.services.show;
+package com.example.mbs.services;
 
 import com.example.mbs.dto.show.ShowDetailDTO;
 import com.example.mbs.exceptions.ShowNotFoundException;
@@ -15,6 +15,8 @@ public class ShowService {
     }
 
     public Show getShowDetail(int id) {
-        return showRepository.findById(id).orElseThrow(ShowNotFoundException::new);
+        Show show = showRepository.findById(id).orElseThrow(ShowNotFoundException::new);
+
+        return show;
     }
 }

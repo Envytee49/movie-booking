@@ -15,6 +15,8 @@ public class ShowDetailDTO {
     private ScreenDetailDTO screen;
     private String movieName;
     public ShowDetailDTO(Show show, String movieName) {
+        System.out.println("hreererererer");
+
         this.movieName = movieName;
         this.startTime = show.getStartTime();
         this.showDate = show.getShowDate();

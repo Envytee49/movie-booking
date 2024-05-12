@@ -1,6 +1,6 @@
 package com.example.mbs.dto.movie;
 
-import com.example.mbs.models.movie.Movie;
+import com.example.mbs.models.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

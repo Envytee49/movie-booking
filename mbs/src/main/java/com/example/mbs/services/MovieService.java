@@ -1,11 +1,10 @@
-package com.example.mbs.services.movie;
+package com.example.mbs.services;
 
 import com.example.mbs.exceptions.MovieNotFoundException;
-import com.example.mbs.models.movie.Movie;
+import com.example.mbs.models.Movie;
 import com.example.mbs.repositories.movie.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 @Service

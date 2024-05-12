@@ -1,6 +1,6 @@
 package com.example.mbs.dto.format;
 
-import com.example.mbs.models.format.Format;
+import com.example.mbs.models.Format;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

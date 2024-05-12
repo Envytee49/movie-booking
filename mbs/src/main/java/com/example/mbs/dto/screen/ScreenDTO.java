@@ -3,10 +3,7 @@ package com.example.mbs.dto.screen;
 import com.example.mbs.dto.format.FormatDTO;
 import com.example.mbs.dto.screen.specialscreen.SpecialScreenDTO;
 import com.example.mbs.dto.theatre.TheatreDTO;
-import com.example.mbs.models.format.Format;
 import com.example.mbs.models.screen.Screen;
-import com.example.mbs.models.screen.specialscreen.SpecialScreen;
-import com.example.mbs.models.theatre.Theatre;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

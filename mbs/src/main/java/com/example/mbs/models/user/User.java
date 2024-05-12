@@ -1,8 +1,8 @@
 package com.example.mbs.models.user;
 
-import com.example.mbs.models.city.City;
-import com.example.mbs.models.reservation.Reservation;
-import com.example.mbs.models.review.Review;
+import com.example.mbs.models.City;
+import com.example.mbs.models.Reservation;
+import com.example.mbs.models.Review;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

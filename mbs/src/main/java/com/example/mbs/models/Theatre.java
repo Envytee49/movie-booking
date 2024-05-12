@@ -1,17 +1,19 @@
-package com.example.mbs.models.theatre;
+package com.example.mbs.models;
 
-import com.example.mbs.models.city.City;
+import com.example.mbs.models.City;
 import com.example.mbs.models.screen.Screen;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "theatres")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

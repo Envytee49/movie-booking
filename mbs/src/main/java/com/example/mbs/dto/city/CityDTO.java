@@ -1,6 +1,6 @@
 package com.example.mbs.dto.city;
 
-import com.example.mbs.models.city.City;
+import com.example.mbs.models.City;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

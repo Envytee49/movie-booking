@@ -1,19 +1,19 @@
 package com.example.mbs.models.screen;
 
-import com.example.mbs.models.format.Format;
+import com.example.mbs.models.Format;
 import com.example.mbs.models.screen.specialscreen.SpecialScreen;
 import com.example.mbs.models.seat.Seat;
 import com.example.mbs.models.show.Show;
-import com.example.mbs.models.theatre.Theatre;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.mbs.models.Theatre;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "screens")
 public class Screen {
@@ -48,6 +48,7 @@ public class Screen {
     @OneToMany(
             mappedBy = "screen",
             cascade = CascadeType.ALL,
-            orphanRemoval = true)
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private Set<Seat> seats;
 }

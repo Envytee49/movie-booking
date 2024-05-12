@@ -1,18 +1,21 @@
 package com.example.mbs.models.seat;
 
-import com.example.mbs.models.fare.Fare;
-import com.example.mbs.models.reservation.Reservation;
+import com.example.mbs.models.Fare;
+import com.example.mbs.models.Reservation;
 import com.example.mbs.models.screen.Screen;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "seats")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +36,15 @@ public class Seat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id")
+    @JsonIgnore
     private Screen screen;
 
     @OneToMany(mappedBy = "seat")
+    @JsonIgnore
     private Set<Fare> fares;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
+    @JsonIgnore
     private Reservation reservation;
 }

@@ -1,8 +1,7 @@
 package com.example.mbs.controllers.show;
 
 import com.example.mbs.dto.show.ShowDetailDTO;
-import com.example.mbs.models.show.Show;
-import com.example.mbs.services.show.ShowService;
+import com.example.mbs.services.ShowService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

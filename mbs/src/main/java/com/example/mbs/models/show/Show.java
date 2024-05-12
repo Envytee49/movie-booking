@@ -1,13 +1,9 @@
 package com.example.mbs.models.show;
-import com.example.mbs.models.fare.Fare;
-import com.example.mbs.models.movie.Movie;
-import com.example.mbs.models.reservation.Reservation;
+import com.example.mbs.models.Fare;
+import com.example.mbs.models.Movie;
+import com.example.mbs.models.Reservation;
 import com.example.mbs.models.screen.Screen;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

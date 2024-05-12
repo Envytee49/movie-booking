@@ -14,7 +14,6 @@ public class ScreenDetailDTO {
     private Set<SeatDTO> seats;
     public ScreenDetailDTO(Screen screen) {
         this.screenName = screen.getScreenName();
-        System.out.println(screen.getSeats());
         this.seats = screen.getSeats().stream().map(SeatDTO::new).collect(Collectors.toSet());
     }
 }

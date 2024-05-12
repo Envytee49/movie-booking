@@ -1,6 +1,6 @@
-package com.example.mbs.services.city;
+package com.example.mbs.services;
 
-import com.example.mbs.models.city.City;
+import com.example.mbs.models.City;
 import com.example.mbs.repositories.city.CityRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
-package com.example.mbs.models.format;
+package com.example.mbs.models;
 
-import com.example.mbs.models.movie.Movie;
 import com.example.mbs.models.screen.Screen;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

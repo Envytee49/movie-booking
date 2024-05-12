@@ -1,14 +1,12 @@
 package com.example.mbs.controllers.movie;
 
 import com.example.mbs.dto.movie.MovieDTO;
-import com.example.mbs.models.movie.Movie;
+import com.example.mbs.models.Movie;
 import com.example.mbs.dto.movie.MovieDetailDTO;
-import com.example.mbs.services.movie.MovieService;
+import com.example.mbs.services.MovieService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.List;
 
 

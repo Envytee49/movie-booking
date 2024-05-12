@@ -1,12 +1,11 @@
 package com.example.mbs.dto.movie;
 
 import com.example.mbs.dto.show.ShowDTO;
-import com.example.mbs.models.movie.Movie;
+import com.example.mbs.models.Movie;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.time.LocalTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 @Data

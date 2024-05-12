@@ -1,7 +1,7 @@
 package com.example.mbs.controllers.city;
 
-import com.example.mbs.models.city.City;
-import com.example.mbs.services.city.CityService;
+import com.example.mbs.models.City;
+import com.example.mbs.services.CityService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,18 +1,13 @@
-package com.example.mbs.models.movie;
+package com.example.mbs.models;
 
-import com.example.mbs.models.format.Format;
-import com.example.mbs.models.review.Review;
 import com.example.mbs.models.show.Show;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -65,7 +60,7 @@ public class Movie {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JsonBackReference
+    @JsonManagedReference
     private Set<Review> reviews;
 
     @OneToMany(
@@ -73,6 +68,7 @@ public class Movie {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonManagedReference
     private Set<Show> shows;
 
     @ManyToMany

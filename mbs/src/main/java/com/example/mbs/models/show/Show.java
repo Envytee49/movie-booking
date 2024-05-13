@@ -1,5 +1,5 @@
 package com.example.mbs.models.show;
-import com.example.mbs.models.Fare;
+import com.example.mbs.models.ShowSeat;
 import com.example.mbs.models.Movie;
 import com.example.mbs.models.Reservation;
 import com.example.mbs.models.screen.Screen;
@@ -33,7 +33,7 @@ public class Show {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
@@ -42,7 +42,7 @@ public class Show {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Fare> fares;
+    private Set<ShowSeat> showSeats;
 
     @OneToMany(mappedBy = "show")
     private Set<Reservation> reservations;

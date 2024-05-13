@@ -4,14 +4,17 @@ import com.example.mbs.models.screen.Screen;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "formats")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Format {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +25,8 @@ public class Format {
     private String formatType;
 
     @ManyToMany(mappedBy = "formats")
-    @JsonBackReference
     private Set<Movie> movies;
 
     @OneToMany(mappedBy = "format")
-    @JsonBackReference
     private Set<Screen> screens;
 }

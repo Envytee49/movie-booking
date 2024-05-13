@@ -31,7 +31,6 @@ public class City {
     private Set<Theatre> theatres;
 
     @OneToMany(mappedBy = "city")
-    @JsonIgnore
     private Set<User> users;
 
     // Getters and setters...

@@ -1,9 +1,9 @@
 package com.example.mbs.models.seat;
 
-import com.example.mbs.models.Fare;
+import com.example.mbs.constants.SeatStatus;
+import com.example.mbs.models.ShowSeat;
 import com.example.mbs.models.Reservation;
 import com.example.mbs.models.screen.Screen;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,20 +31,14 @@ public class Seat {
     @Column(name = "seat_type", length = 20)
     private String seatType;
 
-    @Column(name = "seat_status", length = 20)
-    private String seatStatus;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id")
-    @JsonIgnore
     private Screen screen;
 
-    @OneToMany(mappedBy = "seat")
-    @JsonIgnore
-    private Set<Fare> fares;
+    @OneToMany(mappedBy = "seat", fetch = FetchType.EAGER)
+    private Set<ShowSeat> showSeats;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
-    @JsonIgnore
     private Reservation reservation;
 }

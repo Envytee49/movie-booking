@@ -1,6 +1,5 @@
 package com.example.mbs.services;
 
-import com.example.mbs.dto.show.ShowDetailDTO;
 import com.example.mbs.exceptions.ShowNotFoundException;
 import com.example.mbs.models.show.Show;
 import com.example.mbs.repositories.show.ShowRepository;

@@ -1,5 +1,6 @@
 package com.example.mbs.models;
 
+import com.example.mbs.constants.MovieStatus;
 import com.example.mbs.models.show.Show;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -55,12 +56,14 @@ public class Movie {
     @Column(length = 255)
     private String languages;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "movie_status", length = 255)
+    private MovieStatus movieStatus;
     @OneToMany(
             mappedBy = "movie",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JsonManagedReference
     private Set<Review> reviews;
 
     @OneToMany(
@@ -68,7 +71,6 @@ public class Movie {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JsonManagedReference
     private Set<Show> shows;
 
     @ManyToMany

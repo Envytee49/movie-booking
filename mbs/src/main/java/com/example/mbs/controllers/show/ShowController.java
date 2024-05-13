@@ -1,11 +1,9 @@
 package com.example.mbs.controllers.show;
 
-import com.example.mbs.dto.show.ShowDetailDTO;
+import com.example.mbs.requests.ShowRequest;
+import com.example.mbs.responses.show.ShowDetailResponse;
 import com.example.mbs.services.ShowService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/show")
@@ -16,8 +14,8 @@ public class ShowController {
         this.showService = showService;
     }
 
-    @GetMapping("/book/{movieName}/{id}")
-    public ShowDetailDTO getShowDetail(@PathVariable int id, @PathVariable String movieName) {
-        return new ShowDetailDTO(showService.getShowDetail(id), movieName);
+    @GetMapping("/book/{id}")
+    public ShowDetailResponse getShowDetail(@PathVariable int id, @RequestBody ShowRequest showRequest) {
+        return new ShowDetailResponse(showService.getShowDetail(id), showRequest);
     }
 }

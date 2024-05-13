@@ -12,15 +12,16 @@ import lombok.Setter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class SeatResponse {
     private Integer seatId;
     private String rowNum;
     private Short seatNum;
     private String seatType;
-    private Set<ShowSeat> showSeat;
+    private ShowSeat showSeat;
     public SeatResponse(Seat seat, Integer showId) {
         this.seatId = seat.getSeatId();
         this.rowNum = seat.getRowNum();
@@ -35,6 +36,9 @@ public class SeatResponse {
                         ScreenDetailResponse.totalFreeSeat++;
                     return refShowId == showId;
                 })
-                .collect(Collectors.toSet());
+                .toList()
+                .get(0);
     }
+
+
 }

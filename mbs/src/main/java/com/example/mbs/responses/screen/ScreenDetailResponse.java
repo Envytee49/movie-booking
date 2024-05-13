@@ -19,8 +19,9 @@ public class ScreenDetailResponse {
     private Set<SeatResponse> seats;
     public static int totalFreeSeat;
     public ScreenDetailResponse(Screen screen, Integer showId) {
+        ScreenDetailResponse.totalFreeSeat = 0;
         this.seats = screen.getSeats().stream().map(seat -> new SeatResponse(seat, showId)).collect(Collectors.toSet());
-        totalSeat = seats.size();
-        freeSeats = ScreenDetailResponse.totalFreeSeat;
+        this.totalSeat = seats.size();
+        this.freeSeats = ScreenDetailResponse.totalFreeSeat;
     }
 }

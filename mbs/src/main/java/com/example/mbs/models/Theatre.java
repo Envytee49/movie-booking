@@ -2,11 +2,14 @@ package com.example.mbs.models;
 
 import com.example.mbs.models.City;
 import com.example.mbs.models.screen.Screen;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +31,7 @@ public class Theatre {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
+    @JsonBackReference
     private City city;
 
     @OneToMany(
@@ -35,6 +39,9 @@ public class Theatre {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnore
     private Set<Screen> screens;
 
+    @OneToMany(mappedBy = "theatre")
+    private Set<TheatreMovie> theatreMovies;
 }

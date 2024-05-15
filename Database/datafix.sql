@@ -94,6 +94,16 @@ INSERT INTO movie_format (movie_id, format_id) VALUES
 (1,4),
 (1,5),
 (2,1);
+
+-- theatre movie
+INSERT INTO theatre_movie (theatre_id, movie_id) VALUES
+(1, 1), (1, 2),
+(2, 1), (2, 2),
+(3, 1), (3, 2),
+(4, 1), (4, 2),
+(5, 1), (5, 2),
+(6, 1), (6, 2),
+(7, 1), (7, 2);
 -- screens
 INSERT INTO screens (theatre_id, format_id, sscreen_id, screen_name) VALUES
 (7, 1, null, 'Cinema 1'),
@@ -595,5 +605,4 @@ join theatres t on t.theatre_id = sc.theatre_id
 join cities c on t.city_id = c.city_id
 -- join fares f on f.show_id = sh.show_id and f.seat_id = se.seat_id
 where sh.show_date = '2024-04-22' and m.movie_id = 1
-
 

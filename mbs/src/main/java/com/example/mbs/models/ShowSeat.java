@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class ShowSeat {
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id")
     @JsonIgnore
     private Seat seat;

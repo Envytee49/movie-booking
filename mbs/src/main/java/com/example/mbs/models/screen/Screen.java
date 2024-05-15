@@ -25,15 +25,15 @@ public class Screen {
     @Column(name = "screen_name", length = 20)
     private String screenName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "format_id")
     private Format format;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sscreen_id")
     private SpecialScreen specialScreen;
 

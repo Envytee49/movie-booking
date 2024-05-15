@@ -15,7 +15,7 @@ public class ShowController {
     }
 
     @GetMapping("/book/{id}")
-    public ShowDetailResponse getShowDetail(@PathVariable int id, @RequestBody ShowRequest showRequest) {
-        return new ShowDetailResponse(showService.getShowDetail(id), showRequest);
+    public ShowDetailResponse getShowDetail(@PathVariable int id) {
+        return showService.getShowDetail(id);
     }
 }

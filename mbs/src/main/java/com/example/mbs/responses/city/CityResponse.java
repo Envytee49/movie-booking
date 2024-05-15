@@ -1,4 +1,4 @@
-package com.example.mbs.responses;
+package com.example.mbs.responses.city;
 
 import com.example.mbs.models.City;
 import lombok.Data;
@@ -8,7 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CityResponse {
     private String cityName;
-    public CityResponse(City city){
-        this.cityName = city.getCityName();
-    }
+
 }

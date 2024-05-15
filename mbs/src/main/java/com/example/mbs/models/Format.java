@@ -24,8 +24,12 @@ public class Format {
     @Column(name = "format_type", length = 20)
     private String formatType;
 
-    @ManyToMany(mappedBy = "formats")
-    private Set<Movie> movies;
+    @OneToMany(
+            mappedBy = "format",
+            cascade =  CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<MovieFormat> movieFormats;
 
     @OneToMany(mappedBy = "format")
     private Set<Screen> screens;

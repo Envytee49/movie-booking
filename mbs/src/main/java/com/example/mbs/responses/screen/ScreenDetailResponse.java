@@ -14,12 +14,20 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class ScreenDetailResponse {
+    private String theatreName;
+    private String screenName;
+    private String specialScreen;
+    private String format;
     private int totalSeat;
     private int freeSeats;
     private Set<SeatResponse> seats;
     public static int totalFreeSeat;
     public ScreenDetailResponse(Screen screen, Integer showId) {
         ScreenDetailResponse.totalFreeSeat = 0;
+        this.screenName = screen.getScreenName();
+        this.theatreName = screen.getTheatre().getTheatreName();
+        this.specialScreen = screen.getSpecialScreen() != null ? screen.getSpecialScreen().getSscreenName() : "Normal";
+        this.format = screen.getFormat().getFormatType();
         this.seats = screen.getSeats().stream().map(seat -> new SeatResponse(seat, showId)).collect(Collectors.toSet());
         this.totalSeat = seats.size();
         this.freeSeats = ScreenDetailResponse.totalFreeSeat;

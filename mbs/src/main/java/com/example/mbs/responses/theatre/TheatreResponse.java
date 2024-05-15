@@ -1,6 +1,7 @@
-package com.example.mbs.responses;
+package com.example.mbs.responses.theatre;
 
 import com.example.mbs.models.Theatre;
+import com.example.mbs.responses.city.CityResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,8 +10,5 @@ import lombok.NoArgsConstructor;
 public class TheatreResponse {
     private String theatreName;
     private CityResponse city;
-    public TheatreResponse(Theatre theatre) {
-        this.theatreName = theatre.getTheatreName();
-        this.city = new CityResponse(theatre.getCity());
-    }
+
 }

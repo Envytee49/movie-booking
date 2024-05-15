@@ -11,12 +11,5 @@ import java.sql.Time;
 public class ShowResponse {
     private Integer showId;
     private Time startTime;
-//    private Date showDate;
     private ScreenResponse screen;
-    public ShowResponse(Show show) {
-        this.showId = show.getShowId();
-        this.startTime = show.getStartTime();
-//        this.showDate = show.getShowDate();
-        this.screen = new ScreenResponse(show.getScreen());
-    }
 }

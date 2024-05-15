@@ -73,12 +73,19 @@ public class Movie {
     )
     private Set<Show> shows;
 
-    @ManyToMany
-    @JoinTable(
-            name = "movie_format",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "format_id")
+    @OneToMany(
+            mappedBy = "movie",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    private Set<Format> formats;
+    private Set<MovieFormat> movieFormats;
+
+    @OneToMany(
+            mappedBy = "movie",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<TheatreMovie> theatreMovies;
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.mbs.repositories.seat;
+package com.example.mbs.repositories;
 
 import com.example.mbs.models.seat.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;

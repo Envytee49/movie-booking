@@ -9,7 +9,4 @@ import lombok.NoArgsConstructor;
 public class SpecialScreenResponse {
     private String sscreenName;
 
-    public SpecialScreenResponse(SpecialScreen specialScreen) {
-        this.sscreenName = specialScreen.getSscreenName();
-    }
 }

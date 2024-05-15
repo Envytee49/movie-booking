@@ -13,18 +13,14 @@ import java.sql.Time;
 @Setter
 @NoArgsConstructor
 public class ShowDetailResponse {
-    private String theatreName;
-    private String screenName;
     private String movieTitle;
     private Date showDate;
     private Time startTime;
     private ScreenDetailResponse screen;
-    public ShowDetailResponse(Show show, ShowRequest showRequest) {
-        this.theatreName = showRequest.getTheatreName();
-        this.screenName = showRequest.getScreenName();
-        this.movieTitle = showRequest.getMovieTitle();
-        this.startTime = showRequest.getStartTime();
-        this.showDate = showRequest.getShowDate();
+    public ShowDetailResponse(Show show) {
+        this.movieTitle = show.getMovie().getTitle();
+        this.startTime = show.getStartTime();
+        this.showDate = show.getShowDate();
         this.screen = new ScreenDetailResponse(show.getScreen(), show.getShowId());
     }
 }

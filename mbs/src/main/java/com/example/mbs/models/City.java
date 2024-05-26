@@ -1,6 +1,5 @@
 package com.example.mbs.models;
 
-import com.example.mbs.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -8,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,10 +30,11 @@ public class City {
             orphanRemoval = true
     )
     @JsonManagedReference
-    private Set<Theatre> theatres;
+    private List<Theatre> theatres;
 
     @OneToMany(mappedBy = "city")
-    private Set<User> users;
+    @JsonIgnore
+    private List<User> users;
 
     // Getters and setters...
 }

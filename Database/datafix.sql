@@ -17,22 +17,22 @@ INSERT INTO theatres (theatre_name, city_id) VALUES
 
 -- movie format
 INSERT INTO formats (format_type) VALUES 
-('2D'), 
+('2D'),
 ('3D'),
 ('4DX3D'),
 ('IMAX3D'),
-('ULTRA 4DX-SCX2D');
+('Standard-SCX2D');
 -- special screen
 INSERT INTO special_screens (sscreen_name) VALUES
+('2D'),
 ('SWEET BOX'),
 ('4DX'),
 ('IMAX'),
 ('GOLD CLASS'),
 ('L''AMOUR'),
 ('STARIUM'),
-('PREMIUM CINEMA'),
-('SCREENX'),
-('ULTRA 4DX');
+('VIP CINEMA'),
+('SCREENX'); 
  -- movies
 
 INSERT INTO movies 
@@ -105,20 +105,21 @@ INSERT INTO theatre_movie (theatre_id, movie_id) VALUES
 (6, 1), (6, 2),
 (7, 1), (7, 2);
 -- screens
+
 INSERT INTO screens (theatre_id, format_id, sscreen_id, screen_name) VALUES
-(7, 1, null, 'Cinema 1'),
-(7, 1, 7, 'Cinema 2'),
-(6, 1, null, 'Cinema 1'),
-(5, 3, 2, 'Cinema 1'),
-(5, 1, null, 'Cinema 2'),
-(4, 4, 3, 'Cinema 1'),
-(4, 1, null, 'Cinema 2'),
-(3, 1, null, 'Cinema 1'),
-(3, 4, 3, 'Cinema 2'),
-(2, 1, null, 'Cinema 1'),
-(2, 4, 3, 'Cinema 2'),
-(1, 1, null, 'Cinema 1'),
-(1, 5, 9, 'Cinema 2');
+(7, 1, 1, 'Cinema 1'),
+(7, 1, 2, 'Cinema 2'),
+(6, 1, 3, 'Cinema 1'),
+(5, 1, 4, 'Cinema 1'),
+(5, 1, 1, 'Cinema 2'),
+(4, 1, 2, 'Cinema 1'),
+(4, 1, 3, 'Cinema 2'),
+(3, 1, 4, 'Cinema 1'),
+(3, 1, 1, 'Cinema 2'),
+(2, 1, 2, 'Cinema 1'),
+(2, 1, 3, 'Cinema 2'),
+(1, 1, 4, 'Cinema 1'),
+(1, 1, 1, 'Cinema 2');
 
 INSERT INTO seats (screen_id, row_num, seat_num, seat_type)
 VALUES
@@ -134,14 +135,14 @@ VALUES
 (1, 'C', 2, 'Couple' ),
 (1, 'C', 3, 'Couple' ),
 (1, 'C', 4, 'Couple' ),
-(2, 'A', 1, 'Premium' ),
-(2, 'A', 2, 'Premium' ),
-(2, 'A', 3, 'Premium' ),
-(2, 'A', 4, 'Premium' ),
-(2, 'B', 1, 'Premium' ),
-(2, 'B', 2, 'Premium' ),
-(2, 'B', 3, 'Premium' ),
-(2, 'B', 4, 'Premium' ),
+(2, 'A', 1, 'VIP' ),
+(2, 'A', 2, 'VIP' ),
+(2, 'A', 3, 'VIP' ),
+(2, 'A', 4, 'VIP' ),
+(2, 'B', 1, 'VIP' ),
+(2, 'B', 2, 'VIP' ),
+(2, 'B', 3, 'VIP' ),
+(2, 'B', 4, 'VIP' ),
 (3, 'A', 1, 'Standard' ),
 (3, 'A', 2, 'Standard' ),
 (3, 'A', 3, 'Standard' ),
@@ -154,14 +155,14 @@ VALUES
 (3, 'C', 2, 'Couple' ),
 (3, 'C', 3, 'Couple' ),
 (3, 'C', 4, 'Couple' ),
-(4, 'A', 1, '4DX' ),
-(4, 'A', 2, '4DX' ),
-(4, 'A', 3, '4DX' ),
-(4, 'A', 4, '4DX' ),
-(4, 'B', 1, '4DX' ),
-(4, 'B', 2, '4DX' ),
-(4, 'B', 3, '4DX' ),
-(4, 'B', 4, '4DX' ),
+(4, 'A', 1, 'Standard' ),
+(4, 'A', 2, 'Standard' ),
+(4, 'A', 3, 'Standard' ),
+(4, 'A', 4, 'Standard' ),
+(4, 'B', 1, 'Standard' ),
+(4, 'B', 2, 'Standard' ),
+(4, 'B', 3, 'Standard' ),
+(4, 'B', 4, 'Standard' ),
 (5, 'A', 1, 'Standard' ),
 (5, 'A', 2, 'Standard' ),
 (5, 'A', 3, 'Standard' ),
@@ -246,14 +247,14 @@ VALUES
 (12, 'C', 2, 'Couple' ),
 (12, 'C', 3, 'Couple' ),
 (12, 'C', 4, 'Couple' ),
-(13, 'A', 1, 'Ultra 4DX' ),
-(13, 'A', 2, 'Ultra 4DX' ),
-(13, 'A', 3, 'Ultra 4DX' ),
-(13, 'A', 4, 'Ultra 4DX' ),
-(13, 'B', 1, 'Ultra 4DX' ),
-(13, 'B', 2, 'Ultra 4DX' ),
-(13, 'B', 3, 'Ultra 4DX' ),
-(13, 'B', 4, 'Ultra 4DX' );
+(13, 'A', 1, 'Standard' ),
+(13, 'A', 2, 'Standard' ),
+(13, 'A', 3, 'Standard' ),
+(13, 'A', 4, 'Standard' ),
+(13, 'B', 1, 'Standard' ),
+(13, 'B', 2, 'Standard' ),
+(13, 'B', 3, 'Standard' ),
+(13, 'B', 4, 'Standard' );
 
 -- shows
 INSERT INTO shows (movie_id, screen_id, start_time, show_date)
@@ -547,35 +548,40 @@ FROM shows;
 -- select * from special_screens
 -- select s.*, se.seat_type from screens s , seats se where s.screen_id = se.screen_id
 
-INSERT INTO show_seat (seat_id, show_id, price, seat_status)
-SELECT se.seat_id, sh.show_id, 
-    CASE
-        WHEN se.seat_type = 'Standard' AND sc.sscreen_id IS NULL THEN 80000
-        WHEN se.seat_type = 'VIP' AND sc.sscreen_id IS NULL THEN 100000
-        WHEN se.seat_type = 'Couple' AND sc.sscreen_id IS NULL THEN 115000
-        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 3 THEN 130000
-        WHEN se.seat_type = 'Premium' AND sc.sscreen_id = 7 THEN 150000
-        WHEN se.seat_type = '4DX' AND sc.sscreen_id = 2 THEN 160000
-        WHEN se.seat_type = 'Ultra 4DX' AND sc.sscreen_id = 9 THEN 200000
-        ELSE NULL
-    END AS price,"FREE"
-FROM seats se
-JOIN shows sh ON sh.screen_id = se.screen_id
-JOIN movies m ON m.movie_id = sh.movie_id
-JOIN screens sc ON sc.screen_id = se.screen_id
-LEFT JOIN special_screens s ON sc.sscreen_id = s.sscreen_id
-WHERE m.movie_id = 1;
+-- INSERT INTO show_seat (seat_id, show_id, price, seat_status)
+-- SELECT se.seat_id, sh.show_id, 
+--     CASE
+--         WHEN se.seat_type = 'Standard' AND sc.sscreen_id IS NULL THEN 80000
+--         WHEN se.seat_type = 'VIP' AND sc.sscreen_id IS NULL THEN 100000
+--         WHEN se.seat_type = 'Couple' AND sc.sscreen_id IS NULL THEN 115000
+--         WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 3 THEN 130000
+--         WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 7 THEN 150000
+--         WHEN se.seat_type = '4DX' AND sc.sscreen_id = 2 THEN 160000
+--         WHEN se.seat_type = 'Standard' AND sc.sscreen_id = 9 THEN 200000
+--         ELSE NULL
+--     END AS price,"FREE"
+-- FROM seats se
+-- JOIN shows sh ON sh.screen_id = se.screen_id
+-- JOIN movies m ON m.movie_id = sh.movie_id
+-- JOIN screens sc ON sc.screen_id = se.screen_id
+-- LEFT JOIN special_screens s ON sc.sscreen_id = s.sscreen_id
+-- WHERE m.movie_id = 1;
 
 INSERT INTO show_seat (seat_id, show_id, price, seat_status)
 SELECT se.seat_id, sh.show_id, 
     CASE
-        WHEN se.seat_type = 'Standard' AND sc.sscreen_id IS NULL THEN 70000
-        WHEN se.seat_type = 'VIP' AND sc.sscreen_id IS NULL THEN 95000
-        WHEN se.seat_type = 'Couple' AND sc.sscreen_id IS NULL THEN 110000
-        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 3 THEN 120000
-        WHEN se.seat_type = 'Premium' AND sc.sscreen_id = 7 THEN 140000
-        WHEN se.seat_type = '4DX' AND sc.sscreen_id = 2 THEN 150000
-        WHEN se.seat_type = 'Ultra 4DX' AND sc.sscreen_id = 9 THEN 180000
+        WHEN se.seat_type = 'Standard' AND sc.sscreen_id = 1 THEN 70000
+        WHEN se.seat_type = 'Standard' AND sc.sscreen_id = 2 THEN 80000
+        WHEN se.seat_type = 'Standard' AND sc.sscreen_id = 3 THEN 90000
+        WHEN se.seat_type = 'Standard' AND sc.sscreen_id = 4 THEN 10000        
+        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 1 THEN 85000
+        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 2 THEN 95000
+        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 3 THEN 105000
+        WHEN se.seat_type = 'VIP' AND sc.sscreen_id = 4 THEN 115000
+        WHEN se.seat_type = 'Couple' AND sc.sscreen_id = 1 THEN 110000
+        WHEN se.seat_type = 'Couple' AND sc.sscreen_id = 2 THEN 115000
+        WHEN se.seat_type = 'Couple' AND sc.sscreen_id = 3 THEN 120000
+        WHEN se.seat_type = 'Couple' AND sc.sscreen_id = 4 THEN 125000
         ELSE NULL
     END AS price, "FREE"
 FROM seats se
@@ -583,26 +589,32 @@ JOIN shows sh ON sh.screen_id = se.screen_id
 JOIN movies m ON m.movie_id = sh.movie_id
 JOIN screens sc ON sc.screen_id = se.screen_id
 LEFT JOIN special_screens s ON sc.sscreen_id = s.sscreen_id
-WHERE m.movie_id = 2;
 
-select 
-	c.city_name,
-	t.theatre_name theatre, 
-    sc.screen_name screen, 
-    s.sscreen_name special, 
-    m.title, 
-    -- concat(se.row_num, se.seat_num) seat, 
-    -- se.seat_type, se.seat_status, 
-    -- f.price,
-     sh.start_time,
-    sh.show_date
-from shows sh 
-join screens sc on sh.screen_id = sc.screen_id
-join movies m on sh.movie_id = m.movie_id
--- join seats se on sc.screen_id = se.screen_id
-left join special_screens s on s.sscreen_id = sc.sscreen_id
-join theatres t on t.theatre_id = sc.theatre_id
-join cities c on t.city_id = c.city_id
--- join fares f on f.show_id = sh.show_id and f.seat_id = se.seat_id
-where sh.show_date = '2024-04-22' and m.movie_id = 1
-
+-- select * from seats se
+-- join show_seat ss on ss.seat_id = se.seat_id
+-- where ss.show_id = 30
+-- select 
+-- 	c.city_name,
+-- 	t.theatre_name theatre, 
+--     sc.screen_name screen, 
+--     s.sscreen_name special, 
+--     m.title, 
+--     -- concat(se.row_num, se.seat_num) seat, 
+--     -- se.seat_type, se.seat_status, 
+--     -- f.price,
+--      sh.start_time,
+--     sh.show_date
+-- from shows sh 
+-- join screens sc on sh.screen_id = sc.screen_id
+-- join movies m on sh.movie_id = m.movie_id
+-- -- join seats se on sc.screen_id = se.screen_id
+-- left join special_screens s on s.sscreen_id = sc.sscreen_id
+-- join theatres t on t.theatre_id = sc.theatre_id
+-- join cities c on t.city_id = c.city_id
+-- -- join fares f on f.show_id = sh.show_id and f.seat_id = se.seat_id
+-- where sh.show_date = '2024-04-22' and m.movie_id = 1
+-- use movie_booking_system
+-- select sh.* from shows sh
+-- join screens sc on sh.screen_id = sc.screen_id
+-- join theatres th on sc.theatre_id = th.theatre_id
+-- where th.theatre_id = 2 and sh.show_date = "2024-04-22"

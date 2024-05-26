@@ -1,12 +1,10 @@
 package com.example.mbs.models;
-import com.example.mbs.models.seat.Seat;
-import com.example.mbs.models.show.Show;
-import com.example.mbs.models.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,5 +33,5 @@ public class Reservation {
     private Date createdOn;
 
     @OneToMany(mappedBy = "reservation")
-    private Set<Seat> seats;
+    private List<Seat> seats;
 }

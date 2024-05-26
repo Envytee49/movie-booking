@@ -1,6 +1,6 @@
 package com.example.mbs.repositories;
 
-import com.example.mbs.models.seat.Seat;
+import com.example.mbs.models.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

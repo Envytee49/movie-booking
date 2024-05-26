@@ -1,14 +1,13 @@
 package com.example.mbs.models;
 
 import com.example.mbs.constants.MovieStatus;
-import com.example.mbs.models.show.Show;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -64,21 +63,21 @@ public class Movie {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Review> reviews;
+    private List<Review> reviews;
 
     @OneToMany(
             mappedBy = "movie",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Show> shows;
+    private List<Show> shows;
 
     @OneToMany(
             mappedBy = "movie",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<MovieFormat> movieFormats;
+    private List<MovieFormat> movieFormats;
 
     @OneToMany(
             mappedBy = "movie",

@@ -1,7 +1,5 @@
 package com.example.mbs.models;
 
-import com.example.mbs.models.City;
-import com.example.mbs.models.screen.Screen;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -27,6 +25,7 @@ public class Theatre {
     private String theatreName;
 
     @Column(length = 20)
+    @JsonIgnore
     private String address;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -40,8 +39,9 @@ public class Theatre {
             orphanRemoval = true
     )
     @JsonIgnore
-    private Set<Screen> screens;
+    private List<Screen> screens;
 
     @OneToMany(mappedBy = "theatre")
-    private Set<TheatreMovie> theatreMovies;
+    @JsonIgnore
+    private List<TheatreMovie> theatreMovies;
 }

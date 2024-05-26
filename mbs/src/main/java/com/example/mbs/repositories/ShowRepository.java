@@ -1,6 +1,6 @@
 package com.example.mbs.repositories;
 
-import com.example.mbs.models.show.Show;
+import com.example.mbs.models.Show;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

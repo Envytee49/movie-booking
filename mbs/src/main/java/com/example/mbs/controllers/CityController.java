@@ -1,7 +1,7 @@
 package com.example.mbs.controllers;
 
 import com.example.mbs.models.City;
-import com.example.mbs.responses.city.CityDetailResponse;
+import com.example.mbs.payload.responses.movie.schedule.CityMovie;
 import com.example.mbs.services.CityService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,13 @@ public class CityController {
     }
 
     @GetMapping("/")
-    List<CityDetailResponse> getAllCities() {
+    public List<CityMovie> getAllCities() {
         return cityService.getAllCities();
     }
+
+    @GetMapping("/theatres")
+    public List<City> getCityTheatres() {
+        return cityService.getCityTheatres();
+    }
+
 }

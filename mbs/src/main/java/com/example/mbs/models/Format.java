@@ -1,14 +1,11 @@
 package com.example.mbs.models;
 
-import com.example.mbs.models.screen.Screen;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "formats")
@@ -29,8 +26,8 @@ public class Format {
             cascade =  CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<MovieFormat> movieFormats;
+    private List<MovieFormat> movieFormats;
 
     @OneToMany(mappedBy = "format")
-    private Set<Screen> screens;
+    private List<Screen> screens;
 }

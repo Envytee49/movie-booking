@@ -1,11 +1,11 @@
 package com.example.mbs.controllers;
 
-import com.example.mbs.responses.theatre.TheatreDetailResponse;
+import com.example.mbs.payload.requests.ShowDateRequest;
+import com.example.mbs.payload.responses.theatre.schedule.TheatreScheduleResponse;
 import com.example.mbs.services.TheatreService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/theatre")
@@ -16,8 +16,9 @@ public class TheatreController {
         this.theatreService = theatreService;
     }
 
-    @GetMapping("/{id}")
-    public TheatreDetailResponse getTheatreDetail(@PathVariable int id, @RequestParam Date date) {
-        return theatreService.getTheatreDetail(id, date);
+    @GetMapping("/schedule/{id}")
+    public TheatreScheduleResponse getTheatreDetail(@PathVariable int id, @RequestBody ShowDateRequest date) {
+        Date showDate = Date.valueOf(date.getDate());
+        return theatreService.getTheatreSchedule(id, showDate);
     }
 }

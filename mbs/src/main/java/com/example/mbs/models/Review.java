@@ -1,7 +1,5 @@
 package com.example.mbs.models;
 
-import com.example.mbs.models.Movie;
-import com.example.mbs.models.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

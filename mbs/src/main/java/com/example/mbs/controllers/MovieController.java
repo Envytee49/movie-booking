@@ -1,9 +1,11 @@
 package com.example.mbs.controllers;
 
 import com.example.mbs.constants.MovieStatus;
-import com.example.mbs.responses.movie.MovieResponse;
+import com.example.mbs.payload.dto.MovieDTO;
+import com.example.mbs.payload.requests.ShowDateRequest;
+import com.example.mbs.payload.responses.movie.MovieDetailResponse;
 import com.example.mbs.models.Movie;
-import com.example.mbs.responses.movie.MovieDetailResponse;
+import com.example.mbs.payload.responses.movie.schedule.MovieScheduleResponse;
 import com.example.mbs.services.MovieService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,21 +23,21 @@ public class MovieController {
     }
 
     @GetMapping("/all")
-    public List<MovieDetailResponse> getAllMovies() {
+    public List<MovieDTO> getAllMovies() {
         return movieService.getAllMovies();
     }
-    @GetMapping("/showing")
-    public List<MovieDetailResponse> getShowingMovies() {
-        return movieService.getMovieByStatus(MovieStatus.SHOWING);
+    @GetMapping("movie-status/{movieStatus}")
+    public List<MovieDetailResponse> getMovieByStatus(@PathVariable MovieStatus movieStatus) {
+        return movieService.getMovieByStatus(movieStatus);
     }
-    @GetMapping("/upcoming")
-    public List<MovieDetailResponse> getUpcomingMovies() {
-        return movieService.getMovieByStatus(MovieStatus.UPCOMING);
-    }
-    @GetMapping("/ended")
-    public List<MovieDetailResponse> getEndedMovies() {
-        return movieService.getMovieByStatus(MovieStatus.ENDED);
-    }
+//    @GetMapping("/upcoming")
+//    public List<MovieDetailResponse> getUpcomingMovies() {
+//        return movieService.getMovieByStatus(MovieStatus.UPCOMING);
+//    }
+//    @GetMapping("/ended")
+//    public List<MovieDetailResponse> getEndedMovies() {
+//        return movieService.getMovieByStatus(MovieStatus.ENDED);
+//    }
     @PostMapping("/add")
     public void addMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
@@ -43,7 +45,7 @@ public class MovieController {
 
     @GetMapping("/{id}")
     public MovieDetailResponse getMovieById(@PathVariable int id) {
-        return new MovieDetailResponse(movieService.getMovieById(id));
+        return movieService.getMovieById(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -51,9 +53,10 @@ public class MovieController {
         movieService.deleteMovieById(id);
     }
 
-    @GetMapping("/book/{id}")
-    public MovieResponse getMovieSchedule(@PathVariable int id, @RequestParam Date date) {
-        return movieService.getMovieSchedule(id, date);
+    @GetMapping("/schedule/{id}")
+    public MovieScheduleResponse getMovieSchedule(@PathVariable int id, @RequestBody ShowDateRequest date) {
+        Date showDate = Date.valueOf(date.getDate());
+        return movieService.getMovieSchedule(id, showDate);
     }
 
     @PutMapping("/update-status/{id}")

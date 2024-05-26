@@ -1,38 +1,81 @@
 package com.example.mbs.services;
 
-import com.example.mbs.exceptions.TheatreNotFoundException;
-import com.example.mbs.models.Theatre;
-import com.example.mbs.models.screen.Screen;
+import com.example.mbs.exceptions.ResourceNotFoundException;
+import com.example.mbs.models.*;
+import com.example.mbs.payload.dto.FormatDTO;
+import com.example.mbs.payload.dto.MovieDTO;
+import com.example.mbs.payload.dto.SpecialScreenDTO;
+import com.example.mbs.payload.responses.theatre.schedule.ScreenTheatre;
+import com.example.mbs.payload.responses.theatre.schedule.ShowTheatre;
+import com.example.mbs.payload.responses.theatre.schedule.TheatreScheduleResponse;
 import com.example.mbs.repositories.TheatreRepository;
-import com.example.mbs.responses.theatre.TheatreDetailResponse;
-import com.example.mbs.responses.theatre.TheatreResponse;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TheatreService {
     private final TheatreRepository theatreRepository;
-    private final MovieService movieService;
-    private final CityService cityService;
-    public TheatreService(TheatreRepository theatreRepository, @Lazy MovieService movieService, CityService cityService) {
+    public TheatreService(TheatreRepository theatreRepository) {
         this.theatreRepository = theatreRepository;
-        this.movieService = movieService;
-        this.cityService = cityService;
     }
 
-    public TheatreDetailResponse getTheatreDetail(int id, Date date) {
-        Theatre theatre = theatreRepository.findById(id).orElseThrow(TheatreNotFoundException::new);
-        TheatreDetailResponse theatreDetailResponse = new TheatreDetailResponse();
-        theatreDetailResponse.setTheatreName(theatre.getTheatreName());
-        theatreDetailResponse.setMovies(movieService.getMovie2Response(theatre, date));
-        return theatreDetailResponse;
+    public TheatreScheduleResponse getTheatreSchedule(int id, Date date) {
+
+        Theatre theatre = theatreRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        TheatreScheduleResponse theatreScheduleResponse = new TheatreScheduleResponse();
+        theatreScheduleResponse.setTheatreName(theatre.getTheatreName());
+
+        List<ScreenTheatre> screenTheatres = new ArrayList<>();
+        List<Screen> screens = theatre
+                .getScreens()
+                .stream()
+                .filter(screen -> screen.getTheatre().getTheatreId() == id)
+                .toList();
+        for (Screen screen : screens) {
+            // create screen theatre
+            ScreenTheatre screenTheatre = new ScreenTheatre();
+            screenTheatre.setScreenId(screen.getScreenId());
+            screenTheatre.setScreenName(screen.getScreenName());
+
+            Format format = screen.getFormat();
+            FormatDTO formatDTO = new FormatDTO();
+            formatDTO.setFormatId(format.getFormatId());
+            formatDTO.setFormatType(format.getFormatType());
+
+            SpecialScreen specialScreen = screen.getSpecialScreen();
+            SpecialScreenDTO specialScreenDTO = new SpecialScreenDTO();
+            specialScreenDTO.setSscreenName(specialScreen.getSscreenName());
+
+            // create show theatre
+            List<ShowTheatre> showTheatres = new ArrayList<>();
+            for(Show show : screen.getShows()) {
+                ShowTheatre showTheatre = new ShowTheatre();
+                showTheatre.setShowId(show.getShowId());
+                showTheatre.setStartTime(show.getStartTime());
+
+                // create Movie
+                Movie movie = show.getMovie();
+                MovieDTO movieDTO = MovieDTO.from(movie);
+
+                showTheatre.setMovie(movieDTO);
+
+                showTheatres.add(showTheatre);
+            }
+
+
+
+            screenTheatre.setSpecialScreen(specialScreenDTO);
+            screenTheatre.setFormat(formatDTO);
+            screenTheatre.setShows(showTheatres);
+
+            screenTheatres.add(screenTheatre);
+
+        }
+        theatreScheduleResponse.setScreens(screenTheatres);
+        return theatreScheduleResponse;
     }
-    public TheatreResponse getTheatreResponse(Screen screen) {
-        TheatreResponse theatreResponse = new TheatreResponse();
-        Theatre theatre = screen.getTheatre();
-        theatreResponse.setTheatreName(theatre.getTheatreName());
-        theatreResponse.setCity(cityService.getCityResponse(theatre));
-        return theatreResponse;
-    }
+
 }
